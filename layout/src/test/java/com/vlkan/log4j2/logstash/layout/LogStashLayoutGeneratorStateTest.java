@@ -8,9 +8,14 @@ import org.junit.Test;
 
 import java.nio.BufferOverflowException;
 
+
 public class LogStashLayoutGeneratorStateTest {
     private static final Configuration CONFIGURATION = new DefaultConfiguration();
-
+    /**
+     * Eventually stack overflow error will be thrown due to jason generator state corruption after
+     * any non {@link com.fasterxml.jackson.core.JsonGenerationException}
+     * This occurs when  EmptyPropertyExclusion Enabled  and using thread locals
+     */
     @Test
     public void testGeneratorStateCorruptedAfterUnhandledException() {
         LogstashLayout layout = LogstashLayout
